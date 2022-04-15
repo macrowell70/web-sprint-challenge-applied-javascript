@@ -37,25 +37,12 @@ const cardAppender = (selector) => {
   axios.get(`http://localhost:5001/api/articles`)
   .then(res => {
     const data = res.data.articles;
-    data.bootstrap.forEach(article => {
-      const newCard = Card(article);
-      selector2.appendChild(newCard)
-    })
-    data.javascript.forEach(article => {
-      const newCard = Card(article);
-      selector2.appendChild(newCard)
-    })
-    data.jquery.forEach(article => {
-      const newCard = Card(article);
-      selector2.appendChild(newCard)
-    })
-    data.node.forEach(article => {
-      const newCard = Card(article);
-      selector2.appendChild(newCard)
-    })
-    data.technology.forEach(article => {
-      const newCard = Card(article);
-      selector2.appendChild(newCard)
+    const arr = Array.from(Object.keys(data));
+    arr.forEach(elem => {
+      data[elem].forEach(article => {
+        const newCard = Card(article);
+        selector2.appendChild(newCard);
+      })
     })
   })
   .catch(err => {
